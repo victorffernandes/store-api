@@ -1,12 +1,13 @@
 <html>
+  <title>GOOD TITLE</title>
     <body>
-        <div id="demo"/>
+      <h1>YOU ARE LOGGED YAAAYYY!</h1>
 <script>
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      
+      console.log(this.responseText);
       var r = JSON.parse(this.responseText);
       var parent = document.getElementById('demo');
       for(var q = 0; q < r.length; q++){
@@ -19,13 +20,27 @@ function loadDoc() {
   xhttp.open("GET", "api/products/", true);
   xhttp.send();
 }
+
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function Logout(){
+  delete_cookie('Username');
+}
+
 loadDoc();
 </script>
+<h3>Submit your Product</h3>
 <form action="api/products/" method="POST">
-          <input type='text' id="name" name="name"/>
-          <input type='text' id="price" name="price"/>
+         <h5>Products Name</h5> <input type='text' id="Name" name="Name"/>
+        <h5>Price</h5><input type='text' id="Price" name="Price"/>
            <input type="submit">
-          
         </form>
+        
+    <h4>All Products</h4>
+        <div id="demo"/>
+        
+      <button onclick="Logout();">Log out</button>
     </body>
 </html>
